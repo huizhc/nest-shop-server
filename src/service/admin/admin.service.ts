@@ -11,7 +11,7 @@ export class AdminService {
     constructor(@InjectModel('Admin') private readonly adminModel, private roleAccessService: RoleAccessService, private accessService: AccessService) { }
 
 
-    async find(json: AdminInterface = {}, fields?: string) {
+    async find(json: AdminInterface = {}, fields?: any) {
         try {
             return await this.adminModel.find(json, fields);
         } catch (error) {

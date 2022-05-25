@@ -8,6 +8,7 @@ import {
   Post,
   Body,
 } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
 import { ToolsService } from '../../../service/tools/tools.service';
 
@@ -22,6 +23,7 @@ export class LoginController {
     private toolsService: ToolsService,
     private adminService: AdminService,
     private cookieService: CookieService,
+    private readonly jwtService: JwtService
   ) {}
 
   @Get()
@@ -30,15 +32,15 @@ export class LoginController {
     // console.log(await this.adminService.find());
     return {};
   }
-  @Get('info')
-  async info(@Request() req) {
-    var userInfo = req.session.userinfo;
+  @Post('info')
+  async info(@Request() req, @Body() body) {
+    // var userInfo = req.session.userinfo;
+    console.log(body, 888);
+    let userInfo = await this.jwtService.verify(body.token)
     if (!userInfo) 
     return new ResultData('请先登录', null, false);
 
     // let userInfo=this.cookieService.get(req,'userinfo');
-    userInfo = JSON.parse(JSON.stringify(userInfo))
-    delete userInfo.password
     return new ResultData('操作成功', userInfo, true);
   }
 
@@ -117,14 +119,15 @@ export class LoginController {
           if (userResult.length > 0) {
             console.log('登录成功');
             req.session.userinfo = userResult[0];
-            return new ResultData('登录成功', body, true);
+            const token = this.jwtService.sign({id: userResult[0]._id, username: userResult[0].username});
+            return new ResultData('登录成功', token, true);
             // this.toolsService.success(res,`/${Config.adminPath}/main`);
           } else {
-            return new ResultData('用户名或者密码不正确', body, false);
+            return new ResultData('用户名或者密码不正确', null, false);
             // this.toolsService.error(res,"用户名或者密码不正确",`/${Config.adminPath}/login`);
           }
         } else {
-          return new ResultData('验证码不正确', body, false);
+          return new ResultData('验证码不正确', null, false);
           // this.toolsService.error(res,"验证码不正确",`/${Config.adminPath}/login`);
         }
       }

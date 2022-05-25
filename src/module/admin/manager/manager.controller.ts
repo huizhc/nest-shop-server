@@ -105,7 +105,6 @@ export class ManagerController {
 
       if (adminResult.length > 0) {
         return new ResultData('此管理已经存在', null, false);
-
       } else {
         body.password = this.toolsService.getMd5(body.password);
         this.adminService.add(body);
@@ -127,6 +126,17 @@ export class ManagerController {
       adminResult: adminResult[0],
       roleList: roleResult,
     };
+  }
+  @Get('detail')
+  async detail(@Query() query) {
+    console.log(query);
+
+    var adminResult = await this.adminService.find(
+      { _id: query.id },
+      { password: 0 },
+    );
+
+    return new ResultData('操作成功', adminResult[0], true);
   }
 
   @Post('doEdit')
@@ -169,6 +179,43 @@ export class ManagerController {
     }
 
     this.toolsService.success(res, `/${Config.adminPath}/manager`);
+  }
+
+  @Post('update')
+  async update(@Body() body) {
+    console.log(body);
+    var id = body._id;
+    var password = body.password;
+    var mobile = body.mobile;
+    var email = body.email;
+    var role_id = body.role_id;
+    if (password != '') {
+      if (password.length < 6) {
+        return new ResultData('密码长度不合法', null, false);
+      } else {
+        password = this.toolsService.getMd5(password);
+        await this.adminService.update(
+          { _id: id },
+          {
+            mobile,
+            email,
+            role_id,
+            password,
+          },
+        );
+      }
+    } else {
+      await this.adminService.update(
+        { _id: id },
+        {
+          mobile,
+          email,
+          role_id,
+        },
+      );
+    }
+
+    return new ResultData('操作成功', null, true);
   }
 
   @Get('delete')

@@ -1,3 +1,5 @@
+import { JwtStrategy } from './jwt.strategy';
+import { JwtModule } from '@nestjs/jwt';
 import { CookieService } from './../../service/cookie/cookie.service';
 // import { MemberService } from './../../admin/member/member.service';
 import { MemberSchema } from './../../schema/member.schema';
@@ -37,11 +39,15 @@ import { MemberLoginController } from './member-login/member-login.controller';
       { name: 'Focus', schema: FocusSchema,collection:"focus" },  
       // { name: 'Member', schema: MemberSchema,collection:"member" }  
       
-   ])
+   ]),
+   JwtModule.register({
+    secret: 'dasdjanksjdasd', // 密钥
+    signOptions: { expiresIn: '8h' }, // token 过期时效
+  }),
   ],
   controllers: [MainController, LoginController, ManagerController, RoleController, AccessController, FocusController, MemberController, MemberLoginController],
   // providers:[ToolsService,AdminService,RoleService,AccessService,RoleAccessService,FocusService,MemberService],
-  providers:[ToolsService,AdminService,RoleService,AccessService,RoleAccessService,FocusService,CookieService],
+  providers:[ToolsService,AdminService,RoleService,AccessService,RoleAccessService,FocusService,CookieService,JwtStrategy],
   exports:[AdminService,RoleService,AccessService,RoleAccessService,CookieService]
 })
 export class AdminModule {}

@@ -23,7 +23,7 @@ export class LoginController {
     private toolsService: ToolsService,
     private adminService: AdminService,
     private cookieService: CookieService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
   ) {}
 
   @Get()
@@ -34,14 +34,15 @@ export class LoginController {
   }
   @Post('info')
   async info(@Request() req, @Body() body) {
-    // var userInfo = req.session.userinfo;
-    console.log(body, 888);
-    let userInfo = await this.jwtService.verify(body.token)
-    if (!userInfo) 
-    return new ResultData('请先登录', null, false);
+    try {
+      let userInfo = await this.jwtService.verify(body.token);
+      if (!userInfo) return new ResultData('请先登录', null, false);
 
-    // let userInfo=this.cookieService.get(req,'userinfo');
-    return new ResultData('操作成功', userInfo, true);
+      // let userInfo=this.cookieService.get(req,'userinfo');
+      return new ResultData('操作成功', userInfo, true);
+    } catch (error) {
+      return new ResultData(error.errorMessage, null, false);
+    }
   }
 
   @Get('code')
@@ -119,7 +120,10 @@ export class LoginController {
           if (userResult.length > 0) {
             console.log('登录成功');
             req.session.userinfo = userResult[0];
-            const token = this.jwtService.sign({id: userResult[0]._id, username: userResult[0].username});
+            const token = this.jwtService.sign({
+              id: userResult[0]._id,
+              username: userResult[0].username,
+            });
             return new ResultData('登录成功', token, true);
             // this.toolsService.success(res,`/${Config.adminPath}/main`);
           } else {
@@ -175,15 +179,15 @@ export class LoginController {
 
      */
 
-//   @Get('loginOut')
-//   loginOut(@Request() req, @Response() res) {
-//     req.session.userinfo = null;
-//     res.redirect(`${Config.adminPath}/login`);
-//   }
+  //   @Get('loginOut')
+  //   loginOut(@Request() req, @Response() res) {
+  //     req.session.userinfo = null;
+  //     res.redirect(`${Config.adminPath}/login`);
+  //   }
   @Post('logout')
   handleLoginOut(@Request() req) {
     console.log(222);
-    
+
     req.session.userinfo = null;
     // res.redirect(`${Config.adminPath}/login`);
     return new ResultData('操作成功', null, true);

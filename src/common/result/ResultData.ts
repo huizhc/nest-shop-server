@@ -17,10 +17,10 @@ const messageMap = {
     4: '更新成功',
     5: 'EXCEL失败',
 }
-export class ResultData {
+export class ResultData<T = any> {
     public code: number;
     public message: string | MessageType;
-    public data: any;
+    public data: T;
     public success: boolean;
 
     constructor(messageType: any, data = null, success = true) {

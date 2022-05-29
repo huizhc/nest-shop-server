@@ -654,6 +654,11 @@
     "@types/jsonwebtoken" "8.5.8"
     jsonwebtoken "8.5.1"
 
+"@nestjs/mapped-types@0.4.1":
+  version "0.4.1"
+  resolved "https://registry.npmmirror.com/@nestjs/mapped-types/-/mapped-types-0.4.1.tgz#e7fe038f0bdda7b8f858fa79ca8516b8f9069b1a"
+  integrity sha512-JXrw2LMangSU3vnaXWXVX47GRG1FbbNh4aVBbidDjxT3zlghsoNQY6qyWtT001MCl8lJGo8I6i6+DurBRRxl/Q==
+
 "@nestjs/mongoose@^9.0.2":
   version "9.1.0"
   resolved "https://registry.npmmirror.com/@nestjs/mongoose/-/mongoose-9.1.0.tgz#670a532ac56557d0abf1470b8ab95208fc00ce95"
@@ -685,6 +690,15 @@
     fs-extra "10.0.0"
     jsonc-parser "3.0.0"
     pluralize "8.0.0"
+
+"@nestjs/swagger@^4.8.1":
+  version "4.8.2"
+  resolved "https://registry.npmmirror.com/@nestjs/swagger/-/swagger-4.8.2.tgz#0a0b3ca1b25146e797ca77addd9fa97f82406c1c"
+  integrity sha512-RSUwcVxrzXF7/b/IZ5lXnYHJ6jIGS9wWRTJKIt1kIaCNWT+0wRfTlAyhQkzs2g35/PTXJEcdIwwY7mBO/bwHzw==
+  dependencies:
+    "@nestjs/mapped-types" "0.4.1"
+    lodash "4.17.21"
+    path-to-regexp "3.2.0"
 
 "@nestjs/testing@^8.0.0":
   version "8.2.6"
@@ -3774,7 +3788,7 @@ lodash.once@^4.0.0:
   resolved "https://registry.npmmirror.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
   integrity sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==
 
-lodash@^4.17.19, lodash@^4.17.21, lodash@^4.7.0:
+lodash@4.17.21, lodash@^4.17.19, lodash@^4.17.21, lodash@^4.7.0:
   version "4.17.21"
   resolved "https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -4939,6 +4953,18 @@ svg-captcha@^1.4.0:
   integrity sha512-/fkkhavXPE57zRRCjNqAP3txRCSncpMx3NnNZL7iEoyAtYwUjPhJxW6FQTQPG5UPEmCrbFoXS10C3YdJlW7PDg==
   dependencies:
     opentype.js "^0.7.3"
+
+swagger-ui-dist@>=4.11.0:
+  version "4.11.1"
+  resolved "https://registry.npmmirror.com/swagger-ui-dist/-/swagger-ui-dist-4.11.1.tgz#1e9c0e62bdac632f7b206c95ef9cbe986097606a"
+  integrity sha512-pf3kfSTYdF9mYFY2VnfJ51wnXlSVhEGdtymhpHzfbFw2jTbiEWgBoVz5EB9aW2EaJvUGTM1YHAXYZX7Jk4RdAQ==
+
+swagger-ui-express@^4.1.6:
+  version "4.4.0"
+  resolved "https://registry.npmmirror.com/swagger-ui-express/-/swagger-ui-express-4.4.0.tgz#4c50c51a092075588f173b2c3a5c830f07b6b44e"
+  integrity sha512-1CzRkHG386VQMVZK406jcpgnW2a9A5A/NiAjKhsFTQqUBWRF+uGbXTU/mA7WSV3mTzyOQDvjBdWP/c2qd5lqKw==
+  dependencies:
+    swagger-ui-dist ">=4.11.0"
 
 symbol-observable@4.0.0:
   version "4.0.0"

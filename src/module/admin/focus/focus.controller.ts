@@ -24,12 +24,17 @@ export class FocusController {
   ) {}
 
   @Get()
-  // @Render('admin/focus/index')
+  @Render('admin/focus/index')
   async index() {
     let result = await this.focusService.find();
     return {
       focusList: result,
     };
+  }
+  @Get('all')
+  async all() {
+    let result = await this.focusService.find();
+    return new ResultData('操作成功', result, true);
   }
 
   @Get('add')
@@ -55,6 +60,11 @@ export class FocusController {
     return new ResultData('操作成功', null, true);
     // this.toolsService.success(res,`/${Config.adminPath}/focus`);
   }
+  @Post('add')
+  async handleAdd(@Body() body) {
+    await this.focusService.add(body);
+    return new ResultData('操作成功', null, true);
+  }
 
   @Get('edit')
   @Render('admin/focus/edit')
@@ -65,6 +75,17 @@ export class FocusController {
       return {
         focus: result[0],
       };
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  @Get('detail')
+  async detail(@Query() query) {
+    try {
+      let result = await this.focusService.find({ _id: query.id });
+
+      return new ResultData('操作成功', result[0], true);
     } catch (error) {
       console.log(error);
     }
@@ -96,11 +117,30 @@ export class FocusController {
 
     this.toolsService.success(res, `/${Config.adminPath}/focus`);
   }
+  @Post('update')
+  async update(@Body() body) {
+    let _id = body._id;
+
+
+    await this.focusService.update(
+      {
+        _id: _id,
+      },
+      body,
+    );
+  
+    return new ResultData('操作成功', null, true);
+  }
 
   @Get('delete')
   async delete(@Query() query, @Response() res) {
     var result = await this.focusService.delete({ _id: query.id });
     this.toolsService.success(res, `/${Config.adminPath}/focus`);
+  }
+  @Post('delete')
+  async handleDelete(@Query() query) {
+    var result = await this.focusService.delete({ _id: query.id });
+    return new ResultData('操作成功', result, true);
   }
   //富文本编辑器上传图片  图库上传图片
   @Post('imageUpload')
@@ -109,12 +149,7 @@ export class FocusController {
     console.log(file);
     
     let saveDir = await this.toolsService.uploadFile(file);
-    //缩略图
-    //    if (uploadDir) {
-    //        this.toolsService.jimpImg(uploadDir);
-    //    }
     console.log(saveDir);
-    return new ResultData('操作成功', '/' + saveDir, true);
-    // return { link: '/' + saveDir };
+    return new ResultData('操作成功', saveDir, true);
   }
 }

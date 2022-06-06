@@ -76,10 +76,11 @@ export class GoodsService {
 
         
         // 1、获取当前分类下面的子分类
-        var cateIdsResult=await this.goodsCateService.find({"pid":mongoose.Types.ObjectId(cate_id)});
+        // var cateIdsResult=await this.goodsCateService.find({"pid": new mongoose.Types.ObjectId(cate_id)});
+        var cateIdsResult=await this.goodsCateService.find({"pid": cate_id});
 
         if(cateIdsResult.length==0){
-            cateIdsResult=[{_id:mongoose.Types.ObjectId(cate_id)}];
+            cateIdsResult=[{_id:new mongoose.Types.ObjectId(cate_id)}];
         }
         
         //2、把子分类的_id放在数组里面        
@@ -119,7 +120,7 @@ export class GoodsService {
         try {          
             let temArr = str.replace(/，/g, ',').split(',');             
             temArr.forEach((value) => {
-                idsArr.push(mongoose.Types.ObjectId(value));
+                idsArr.push(new mongoose.Types.ObjectId(value));
             })
             return idsArr;
         } catch (error) {

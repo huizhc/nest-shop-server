@@ -1,3 +1,6 @@
+import { NavService } from './../../service/nav/nav.service';
+import { NavController } from './nav/nav.controller';
+import { NavSchema } from './../../schema/nav.schema';
 import { GoodsImageService } from './../../service/goods-image/goods-image.service';
 import { GoodsImageSchema } from './../../schema/goods_image.schema';
 import { GoodsColorSchema } from './../../schema/goods_color.schema';
@@ -62,6 +65,7 @@ import { MemberLoginController } from './member-login/member-login.controller';
       { name: 'GoodsAttr', schema: GoodsAttrSchema,collection:"goods_attr" },  
       { name: 'GoodsColor', schema: GoodsColorSchema,collection:"goods_color" },  
       { name: 'GoodsImage', schema: GoodsImageSchema,collection:"goods_image" },  
+      { name: 'Nav', schema: NavSchema,collection:"nav" },  
       
    ]),
    JwtModule.register({
@@ -69,8 +73,8 @@ import { MemberLoginController } from './member-login/member-login.controller';
     signOptions: { expiresIn: '8h' }, // token 过期时效
   }),
   ],
-  controllers: [MainController, LoginController, ManagerController, RoleController, AccessController, FocusController, MemberController, MemberLoginController, GoodsTypeController, GoodsTypeAttributeController, GoodsCateController, GoodsController],
-  providers:[ToolsService,AdminService,RoleService,AccessService,RoleAccessService,FocusService,CookieService,JwtStrategy, GoodsTypeService, GoodsTypeAttributeService, GoodsCateService, GoodsService, GoodsAttrService, GoodsColorService, GoodsImageService],
+  controllers: [MainController, LoginController, ManagerController, RoleController, AccessController, FocusController, MemberController, MemberLoginController, GoodsTypeController, GoodsTypeAttributeController, GoodsCateController, GoodsController, NavController],
+  providers:[ToolsService,AdminService,RoleService,AccessService,RoleAccessService,FocusService,CookieService,JwtStrategy, GoodsTypeService, GoodsTypeAttributeService, GoodsCateService, GoodsService, GoodsAttrService, GoodsColorService, GoodsImageService, NavService],
   exports:[AdminService,RoleService,AccessService,RoleAccessService,CookieService]
 })
 export class AdminModule {}

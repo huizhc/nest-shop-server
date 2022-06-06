@@ -28,7 +28,7 @@
     "@nestjs/passport": "^8.2.1",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^4.8.1",
-    "swagger-ui-express": "^4.1.6",
+    "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",
     "ejs": "^3.1.6",
     "express-session": "^1.17.2",
@@ -41,7 +41,9 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "silly-datetime": "^0.1.2",
-    "svg-captcha": "^1.4.0"
+    "svg-captcha": "^1.4.0",
+    "swagger-ui-express": "^4.1.6",
+    "ueditor": "^1.2.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",

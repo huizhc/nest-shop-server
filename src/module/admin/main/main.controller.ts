@@ -1,3 +1,13 @@
+/*
+ * @Author: huizhc 1125133876@qq.com
+ * @Date: 2022-02-10 09:16:55
+ * @LastEditors: huizhc 1125133876@qq.com
+ * @LastEditTime: 2022-06-01 15:23:31
+ * @FilePath: \【源码】nestxiaomi\src\module\admin\main\main.controller.ts
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by huizhc 1125133876@qq.com, All Rights Reserved. 
+ */
 import { Controller, Get, Render ,Request} from '@nestjs/common';
 import {Config} from '../../../config/config';
 import { AccessService } from '../../../service/access/access.service';

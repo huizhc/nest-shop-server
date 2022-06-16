@@ -7,6 +7,7 @@ export class GoodsImageService {
 
     constructor(@InjectModel('GoodsImage') private readonly goodsImageModel) {}
     async find(json:GoodsImageInterface={},fields?:string,limit:number=6){
+        console.log(json, 'json')
         try {
             return await this.goodsImageModel.find(json,fields).limit(limit);
         } catch (error) {

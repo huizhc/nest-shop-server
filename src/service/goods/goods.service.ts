@@ -90,7 +90,7 @@ export class GoodsService {
         });
 
         //3、查找条件
-        let findJson={cate_id: { $in: cateIdsResult }};
+        let findJson={cate_id: { $in: temArr }};
         //判断类型 合并对象    
         switch(type){
             case 'hot':    
@@ -106,10 +106,9 @@ export class GoodsService {
                 findJson=Object.assign(findJson,{});        
                 break;
         }
-
+        
         //4、获取子分类下面的热门商品
-        let goodsArr =await this.findIn(findJson,'title goods_img shop_price',limit,skip);
-
+        let goodsArr =await this.findIn(findJson,'title goods_img shop_price sub_title',limit,skip);
         return goodsArr;
 
 

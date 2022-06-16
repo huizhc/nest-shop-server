@@ -60,6 +60,9 @@ export class FocusController {
     return new ResultData('操作成功', null, true);
     // this.toolsService.success(res,`/${Config.adminPath}/focus`);
   }
+
+  /**由此开始 */
+
   @Post('add')
   async handleAdd(@Body() body) {
     await this.focusService.add(body);

@@ -1,3 +1,5 @@
+
+import * as mongoose from 'mongoose';
 export interface GoodsCateInterface {
   _id?:String;
   title?:String;
@@ -5,7 +7,7 @@ export interface GoodsCateInterface {
   filter_attr?:String;
   link?:String;
   template?:String;
-  pid?:String;    
+  pid?:any;    
   sub_title?: String;         /*seo相关的标题  关键词  描述*/
   keywords?: String;
   description?: String;      

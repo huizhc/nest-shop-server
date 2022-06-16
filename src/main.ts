@@ -84,9 +84,15 @@ async function bootstrap() {
   //配置cookie中间件
   app.use(cookieParser('this signed cookies'));
   app.enableCors({
-    origin: 'http://localhost:9528',
-    credentials: true,
-  });
+    origin: '*',
+    methods: 'GET, PUT, POST, DELETE',
+    allowedHeaders: 'Content-Type, Authorization',
+});
+// http://localhost:8080
+// app.enableCors({
+//   origin: 'http://127.0.0.1:6379',
+//   credentials: true,
+// });
   //配置session的中间件
   app.use(
     session({

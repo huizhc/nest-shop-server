@@ -14,11 +14,19 @@ import { MemberController } from './member/member.controller';
 import { NavController } from './nav/nav.controller';
 import { RoleController } from './role/role.controller';
 import { SystemController } from './system/system.controller';
+import { JwtStrategy } from '../public/jwt.strategy';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
+    JwtModule.register({
+      secret: 'dasdjanksjdasd', // 密钥
+      // secretOrPrivateKey: 'marvin',
+      signOptions: { expiresIn: '8h' }, // token 过期时效
+    }),
     PublicModule,
   ],
+  providers: [JwtStrategy],
   controllers: [
     MainController,
     LoginController,

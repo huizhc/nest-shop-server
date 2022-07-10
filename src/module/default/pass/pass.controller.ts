@@ -48,11 +48,10 @@ export class PassController {
    //执行登录
    @Post('doLogin')
    async doLogin(@Body() body, @Request() req) {
-      console.log(body)
       var username = body.username;
       var password = body.password;
       var identify_code = body.identify_code;
-      if (identify_code != req.session.identify_code) {
+      if (identify_code.toUpperCase() != req.session.identify_code.toUpperCase()) {
          //后端重新生成验证码
          let svgCaptcha = this.toolsService.getCaptcha(4, 80, 40);
          req.session.identify_code = svgCaptcha.text;
@@ -61,26 +60,24 @@ export class PassController {
          password = this.toolsService.getMd5(password);
          let userInfo = await this.userService.find({ "phone": username, "password": password }, '_id phone last_ip add_time email status');
          if (userInfo && userInfo.length > 0) {
-            console.log(userInfo[0])
             const token =  this.jwtService.sign({
                id: userInfo[0]._id,
                username: userInfo[0].phone,
-             }, { secret: 'marvin' });
+             });
             // this.cookieService.set(res, 'userinfo', userInfo[0]);
-         return new ResultData('登录成功', token, true)
+            return new ResultData('登录成功', token, true)
          } else {
             let svgCaptcha = this.toolsService.getCaptcha(4, 80, 40);
             req.session.identify_code = svgCaptcha.text;
-         return new ResultData('用户名或者密码不正确', null, false)
+            return new ResultData('用户名或者密码不正确', null, false)
          }
 
       }
    }
 
-   @Post('userInfo')
+@Post('userInfo')
   @UseGuards(AuthGuard('jwt'))
   userInfo(@Request() req) {
-   console.log(req)
       return new ResultData('登录成功', req.user, true)
    }
 
@@ -194,12 +191,10 @@ export class PassController {
 
          if (userTempResult[0].send_count < 4) {
             let send_count = userTempResult[0].send_count + 1;
-            console.log(add_time)
             await this.userTempService.update({ "phone": phone, sign: sign, add_day: add_day }, { send_count: send_count, add_time });
             // 发送验证码 保存验证
             // this.toolsService.sendMsg()         
             req.session.phone_code = phone_code;
-            console.log(phone_code);
          return new ResultData('短信发送成功', {sign, phone, phone_code}, true)
          } else {
          return new ResultData('当前手机号发送短信的次数太多了', {sign, phone}, false)
@@ -208,7 +203,6 @@ export class PassController {
 
       } else {
          //发送验证码 保存验证
-         console.log(phone_code);
          // this.toolsService.sendMsg()         
          req.session.phone_code = phone_code;
          this.userTempService.add({
@@ -348,7 +342,6 @@ export class PassController {
    //       function (error, response, body) {
    //          if (response.statusCode == 200) {
    //             // 第三步：拉取用户信息(需scope为 snsapi_userinfo)
-   //             //console.log(JSON.parse(body));
    //             var data = JSON.parse(body);
    //             var access_token = data.access_token;
    //             var openid = data.openid;
@@ -360,7 +353,6 @@ export class PassController {
    //                   if (response.statusCode == 200) {
    //                      // 第四步：根据获取的用户信息进行对应操作
    //                      var userinfo = JSON.parse(body);
-   //                      console.log(userinfo);
    //                      //其实，到这就写完了，你应该拿到微信信息以后去干该干的事情，比如对比数据库该用户有没有关联过你们的数据库，如果没有就让用户关联....等等等...
    //                      // 小测试，实际应用中，可以由此创建一个帐户
    //                      res.send("\
@@ -370,12 +362,10 @@ export class PassController {
    //                              <p>openid: "+ userinfo.openid + "</p>\
    //                          ");
    //                   } else {
-   //                      console.log(response.statusCode);
    //                   }
    //                }
    //             );
    //          } else {
-   //             console.log(response.statusCode);
    //          }
    //       }
    //    )

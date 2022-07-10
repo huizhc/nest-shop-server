@@ -1,7 +1,6 @@
 import { Module ,NestModule,MiddlewareConsumer} from '@nestjs/common';
 import { AdminModule } from './module/admin/admin.module';
 import { DefaultModule } from './module/default/default.module';
-import { ApiModule } from './module/api/api.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import {AdminauthMiddleware} from './middleware/adminauth.middleware';
 import {InitMiddleware} from './middleware/init.middleware';
@@ -13,7 +12,7 @@ import { PublicModule } from './module/public/public.module';
 
 @Module({
   imports: [
-    AdminModule, DefaultModule, ApiModule,
+    AdminModule, DefaultModule, 
     MongooseModule.forRoot('mongodb://127.0.0.1:27017/nestxiaomi',{ useNewUrlParser: true }),
     PublicModule
   ],

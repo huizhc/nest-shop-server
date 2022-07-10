@@ -15,7 +15,7 @@ export class IndexController {
     private focusService: FocusService,
     private goodsCateService: GoodsCateService,
     private goodsService: GoodsService,
-    private cacheService: CacheService,
+    // private cacheService: CacheService,
   ) {}
 
   @Get()
@@ -36,7 +36,7 @@ export class IndexController {
       position: 1,
       status: 1,
     });
-    this.cacheService.set('topNav', topNavResult, 60 * 60);
+    // this.cacheService.set('topNav', topNavResult, 60 * 60);
     // }
 
     // focusResult = await this.cacheService.get('focus');
@@ -47,7 +47,7 @@ export class IndexController {
         sort: -1,
       },
     );
-    this.cacheService.set('focus', focusResult, 60 * 60);
+    // this.cacheService.set('focus', focusResult, 60 * 60);
     // }
     // goodsCateResult = await this.cacheService.get('goodsCate');
     // if (!goodsCateResult) {
@@ -67,7 +67,7 @@ export class IndexController {
         },
       },
     ]);
-    this.cacheService.set('goodsCate', goodsCateResult, 60 * 60);
+    // this.cacheService.set('goodsCate', goodsCateResult, 60 * 60);
     // }
 
     // middleNavResult = await this.cacheService.get('middleNav');
@@ -104,7 +104,7 @@ export class IndexController {
         }
       }
     }
-    this.cacheService.set('middleNav', middleNavResult, 60 * 60);
+    // this.cacheService.set('middleNav', middleNavResult, 60 * 60);
     // }
     //middleNavResult 不可改变对象 (坑)  改为可改变对象
     // //手机
@@ -127,7 +127,7 @@ export class IndexController {
       'hot',
       8,
     );
-    this.cacheService.set('phone', phoneResult, 60 * 60);
+    // this.cacheService.set('phone', phoneResult, 60 * 60);
     // }
     // console.timeEnd('index');
 

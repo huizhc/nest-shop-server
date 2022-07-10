@@ -1,5 +1,8 @@
 import { UserTempService } from './../../service/user-temp/user-temp.service';
 import { UserService } from './../../service/user/user.service';
+import { AddressService } from './../../service/address/address.service';
+import { OrderService } from './../../service/order/order.service';
+import { OrderItemService } from './../../service/order-item/order-item.service';
 import { UserTempSchema } from './../../schema/user_temp.schema';
 import { UserSchema } from './../../schema/user.schema';
 import { Module } from '@nestjs/common';
@@ -23,6 +26,9 @@ import { GoodsImageSchema } from './../../schema/goods_image.schema';
 import { GoodsTypeSchema } from './../../schema/goods_type.schema';
 import { GoodsTypeAttributeSchema } from './../../schema/goods_type_attribute.schema';
 import { NavSchema } from './../../schema/nav.schema';
+import { AddressSchema } from './../../schema/address.schema';
+import { OrderSchema } from './../../schema/order.schema';
+import { OrderItemSchema } from './../../schema/order_item.schema';
 import { CookieService } from './../../service/cookie/cookie.service';
 import { GoodsAttrService } from './../../service/goods-attr/goods-attr.service';
 import { GoodsCateService } from './../../service/goods-cate/goods-cate.service';
@@ -32,17 +38,16 @@ import { GoodsTypeAttributeService } from './../../service/goods-type-attribute/
 import { GoodsTypeService } from './../../service/goods-type/goods-type.service';
 import { GoodsService } from './../../service/goods/goods.service';
 import { NavService } from './../../service/nav/nav.service';
-import { CacheService } from '../../service/cache/cache.service';
-import { JwtModule, JwtService } from '@nestjs/jwt';
-import { JwtStrategy } from './jwt.strategy';
+// import { CacheService } from '../../service/cache/cache.service';
+// import { JwtModule } from '@nestjs/jwt';
+// import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
-    JwtModule.register({
-      secret: 'marvin', // 密钥
-      secretOrPrivateKey: 'marvin',
-      signOptions: { expiresIn: '8h' }, // token 过期时效
-    }),
+    // JwtModule.register({
+    //   secret: 'dasdjanksjdasd', // 密钥
+    //   signOptions: { expiresIn: '8h' }, // token 过期时效
+    // }),
     MongooseModule.forFeature([
       { name: 'Admin', schema: AdminSchema, collection: 'admin' },
       { name: 'Role', schema: RoleSchema, collection: 'role' },
@@ -75,9 +80,11 @@ import { JwtStrategy } from './jwt.strategy';
       { name: 'Nav', schema: NavSchema, collection: 'nav' },
       { name: 'User', schema: UserSchema, collection: 'user' },
       { name: 'UserTemp', schema: UserTempSchema, collection: 'user_temp' },
+      { name: 'Address', schema: AddressSchema, collection: 'address' },
+      { name: 'Order', schema: OrderSchema, collection: 'order' },
+      { name: 'OrderItem', schema: OrderItemSchema, collection: 'order_item' },
     ]),
     // PassportModule.register({ defaultStrategy: 'jwt' }),
-   
   ],
   providers: [
     ToolsService,
@@ -95,11 +102,12 @@ import { JwtStrategy } from './jwt.strategy';
     GoodsColorService,
     GoodsImageService,
     NavService,
-    CacheService,
+    // CacheService,
     UserService,
     UserTempService,
-    JwtStrategy,
-    JwtService
+    AddressService,
+    OrderService,
+    OrderItemService,
   ],
   exports: [
     ToolsService,
@@ -117,10 +125,13 @@ import { JwtStrategy } from './jwt.strategy';
     GoodsColorService,
     GoodsImageService,
     NavService,
-    CacheService,
+    // CacheService,
     UserService,
     UserTempService,
-    JwtService
+    AddressService,
+    OrderService,
+    OrderItemService,
+    // JwtService,
   ],
 })
 export class PublicModule {}

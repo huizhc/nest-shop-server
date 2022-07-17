@@ -33,7 +33,8 @@ import { GoodsTypeAttributeService } from '../../../service/goods-type-attribute
 import * as mongoose from 'mongoose';
 
 import { ToolsService } from '../../../service/tools/tools.service';
-import { IdDTO } from 'src/common/dto/id.dto';
+import { IdDTO } from '../goods-cate/dto/id.dto';
+// import { IdDTO } from '../../../src/common/dto/id.dto';
 @ApiTags('商品模块')
 @Controller(`${Config.adminPath}/goods`)
 export class GoodsController {

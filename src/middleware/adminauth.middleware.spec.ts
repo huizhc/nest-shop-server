@@ -1,7 +1,7 @@
-import { AdminauthMiddleware } from './adminauth.middleware';
+// import { AdminauthMiddleware } from './adminauth.middleware';
 
-describe('AdminauthMiddleware', () => {
-  it('should be defined', () => {
-    expect(new AdminauthMiddleware()).toBeDefined();
-  });
-});
+// describe('AdminauthMiddleware', () => {
+//   it('should be defined', () => {
+//     expect(new AdminauthMiddleware()).toBeDefined();
+//   });
+// });

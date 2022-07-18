@@ -1,5 +1,5 @@
 export class Config {     
-    static adminPath = 'api/admin'; 
+    static adminPath = 'admin'; 
     static sessionMaxAge = 30 * 1000 * 60; 
     static uploadDir='upload';
     static redisOptions={

@@ -14,7 +14,7 @@ import { JwtStrategy } from '../public/jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { MODULE_PATH } from '@nestjs/common/constants';
 
-@SetMetadata(MODULE_PATH, 'api')
+// @SetMetadata(MODULE_PATH, 'api')
 @Module({
   imports: [
     JwtModule.register({
